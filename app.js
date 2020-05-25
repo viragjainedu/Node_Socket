@@ -1,11 +1,26 @@
 const io = require("socket.io-client");
 
-let socket = io("http://localhost:3000");
+// --------------------------------------------------//
 
-socket.on("welcome", (data) => {
+//games section of chat 
+let games = io("http://localhost:3000/games");
+//recieving games sections
+games.on("welcome", (data) => {
    console.log("Message: ", data);
 });
 
-// socket.emit('')
+games.emit("joinRoom", "pubg");
+games.on("success" , (res) => {console.log(res);})
+games.on("err" , (res) => {console.log(res);})
+games.on("newUser" , (res) => {console.log(res);})
+// --------------------------------------------------//
 
-// socket.on("hi")
+
+// //sports section of chat
+// let sports = io("http://localhost:3000/sports");
+// //recieving sports data
+// sports.on("welcome", (data) => {
+//    console.log("Message: ", data);
+// });
+// //sending sports data
+// sports.emit("cricket" , "Recieved");
